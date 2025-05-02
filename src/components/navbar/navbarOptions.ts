@@ -5,7 +5,7 @@ interface Options {
 }
 
 const navbarOptions: Options = {
-  Words: ["A - Z", "10 words", "25 words", "50 words", "75 words", "100 words"],
+  Words: ["10 words", "25 words", "50 words", "75 words", "100 words"],
   Lines: [
     "5 lines",
     "10 lines",
