@@ -1,10 +1,16 @@
 import { useState } from "react";
 
 const NavbarBtns = ({ navbarOptions }: any) => {
-  const [isOpen, setisOpen] = useState("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedBtn, setSelectedBtn] = useState<string>("");
 
   const handleClick = (btn: string) => {
-    setisOpen(btn);
+    setIsOpen(!isOpen);
+    setSelectedBtn(btn);
+  };
+
+  const handleHover = (btn: string) => {
+    isOpen && setSelectedBtn(btn);
   };
 
   return (
@@ -18,10 +24,15 @@ const NavbarBtns = ({ navbarOptions }: any) => {
           <button
             className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
             key={btn}
-            onClick={() => handleClick(btn)}>
+            onClick={() => handleClick(btn)}
+            onMouseEnter={() => handleHover(btn)}
+            onBlur={() => {
+              setIsOpen(false);
+              setSelectedBtn("");
+            }}>
             {btn}
           </button>
-          {isOpen === btn && navbarOptions[btn] ? (
+          {selectedBtn === btn && navbarOptions[btn] ? (
             <ul className="absolute text-center top-10 left-0 border-2 rounded-lg py-0.5 w-full min-w-23">
               {navbarOptions[btn].slice(0, -1).map((option: string) => (
                 <li className="border-b-2" key={option}>
