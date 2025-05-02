@@ -1,6 +1,10 @@
 const NavbarBtns = ({ navbarOptions }: any) => {
   return (
     <>
+      <button className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75">
+        A-Z
+      </button>
+
       {Object.keys(navbarOptions).map((btn) => (
         <div className="relative w-full">
           <button
