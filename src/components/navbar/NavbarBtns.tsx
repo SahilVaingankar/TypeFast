@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NavbarBtns = ({ navbarOptions }: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedBtn, setSelectedBtn] = useState<string>("");
 
   const handleClick = (btn: string) => {
-    // if (btn == "Code") {
-    //   console.log(btn);
-    // }
-    if (isOpen) {
-      setIsOpen(false);
-      setSelectedBtn("");
-    } else {
-      setIsOpen(!isOpen);
-      setSelectedBtn(btn);
-    }
+    setSelectedBtn(btn);
+    // setIsOpen(!isOpen);
   };
+
+  // if (btn == "Code") {
+  //   console.log(btn);
+  // }
+  useEffect(() => {
+    // if (isOpen) {
+    //   setIsOpen(false);
+    //   setSelectedBtn("");
+    // } else {
+    // setIsOpen(!isOpen);
+    // setSelectedBtn(btn);
+    // }
+    setIsOpen(!isOpen);
+
+    return () => {
+      setIsOpen(false);
+      // setSelectedBtn("");
+    };
+  }, [selectedBtn]);
+  // };
 
   const handleHover = (btn: string) => {
     isOpen && setSelectedBtn(btn);
@@ -28,8 +40,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
         onClick={() => handleClick("A-Z")}
         onMouseEnter={() => handleHover("A-Z")}
         onBlur={() => {
-          setIsOpen(false);
-          setSelectedBtn("");
+          if (!selectedBtn) {
+            setIsOpen(false);
+            setSelectedBtn("");
+          }
         }}>
         A-Z
       </button>
@@ -44,6 +58,14 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             onBlur={() => {
               setIsOpen(false);
               setSelectedBtn("");
+
+              // if (!selectedBtn) {
+              //   setIsOpen(false);
+              //   setSelectedBtn("");
+              // } else {
+              //   setIsOpen(false);
+              //   setSelectedBtn("");
+              // }
             }}>
             {btn}
           </button>
