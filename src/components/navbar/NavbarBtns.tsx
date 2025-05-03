@@ -6,7 +6,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
 
   const handleClick = (btn: string) => {
     setSelectedBtn(btn);
-    setIsOpen(!isOpen);
+    // setIsOpen(!isOpen);
   };
 
   const handleHover = (btn: string) => {
@@ -17,11 +17,11 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     <>
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
-        onClick={() => {
-          setSelectedBtn("A-Z");
-          setIsOpen(false);
-        }}
-        onMouseEnter={() => handleHover("A-Z")}>
+        onClick={() => handleClick("A-z")}
+        onMouseEnter={() => {
+          handleHover("A-Z");
+          setIsOpen(true);
+        }}>
         A-Z
       </button>
 
@@ -34,15 +34,11 @@ const NavbarBtns = ({ navbarOptions }: any) => {
                 : "text-white border-white"
             } hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75`}
             key={btn}
-            onClick={
-              navbarOptions[btn]
-                ? () => handleClick(btn)
-                : () => {
-                    setSelectedBtn(btn);
-                    setIsOpen(false);
-                  }
-            }
-            onMouseEnter={() => handleHover(btn)}>
+            onClick={() => handleClick(btn)}
+            onMouseEnter={() => {
+              handleHover(btn);
+              setIsOpen(true);
+            }}>
             {btn}
           </button>
           {isOpen && selectedBtn === btn && navbarOptions[btn] ? (
