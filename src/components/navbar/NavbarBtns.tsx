@@ -17,7 +17,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     <>
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
-        onClick={() => setSelectedBtn("A-Z")}
+        onClick={() => {
+          setSelectedBtn("A-Z");
+          setIsOpen(false);
+        }}
         onMouseEnter={() => handleHover("A-Z")}>
         A-Z
       </button>
@@ -34,7 +37,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             onClick={
               navbarOptions[btn]
                 ? () => handleClick(btn)
-                : () => setSelectedBtn(btn)
+                : () => {
+                    setSelectedBtn(btn);
+                    setIsOpen(false);
+                  }
             }
             onMouseEnter={() => handleHover(btn)}>
             {btn}
