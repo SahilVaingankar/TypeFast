@@ -1,41 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const NavbarBtns = ({
-  navbarOptions,
-  isOpen,
-  setIsOpen,
-  selectedBtn,
-  setSelectedBtn,
-}: any) => {
+const NavbarBtns = ({ navbarOptions }: any) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedBtn, setSelectedBtn] = useState<string>("");
+
   const handleClick = (btn: string) => {
-    if (isOpen) {
-      setIsOpen(false);
-      setSelectedBtn("");
-    } else {
-      setIsOpen(!isOpen);
-      setSelectedBtn(btn);
-    }
+    setSelectedBtn(btn);
+    setIsOpen(!isOpen);
   };
-
-  // if (btn == "Code") {
-  //   console.log(btn);
-  // }
-  // useEffect(() => {
-  // if (isOpen) {
-  //   setIsOpen(false);
-  //   setSelectedBtn("");
-  // } else {
-  // setIsOpen(!isOpen);
-  // setSelectedBtn(btn);
-  // }
-  // setIsOpen(!isOpen);
-
-  // return () => {
-  //   setIsOpen(false);
-  // setSelectedBtn("");
-  //   };
-  // }, [selectedBtn]);
-  // };
 
   const handleHover = (btn: string) => {
     isOpen && setSelectedBtn(btn);
@@ -46,14 +18,7 @@ const NavbarBtns = ({
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
         onClick={() => handleClick("A-Z")}
-        onMouseEnter={() => handleHover("A-Z")}
-        // onBlur={() => {
-        //   if (!selectedBtn) {
-        //     setIsOpen(false);
-        //     setSelectedBtn("");
-        //   }
-        // }}
-      >
+        onMouseEnter={() => handleHover("A-Z")}>
         A-Z
       </button>
 
@@ -63,20 +28,7 @@ const NavbarBtns = ({
             className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
             key={btn}
             onClick={() => handleClick(btn)}
-            onMouseEnter={() => handleHover(btn)}
-            // onBlur={() => {
-            //   setIsOpen(false);
-            //   setSelectedBtn("");
-
-            // if (!selectedBtn) {
-            //   setIsOpen(false);
-            //   setSelectedBtn("");
-            // } else {
-            //   setIsOpen(false);
-            //   setSelectedBtn("");
-            // }
-            // }}
-          >
+            onMouseEnter={() => handleHover(btn)}>
             {btn}
           </button>
           {isOpen && selectedBtn === btn && navbarOptions[btn] ? (
@@ -93,25 +45,8 @@ const NavbarBtns = ({
               </li>
             </ul>
           ) : null}
-          {/* <li>
-            {navbarOptions[btn]
-              ? navbarOptions[btn][navbarOptions[btn].length - 1]
-              : null}
-          </li> */}
         </div>
       ))}
-      {/* <button className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75">
-        {btn}
-      </button>
-      <ul className="absolute text-center top-10 left-0 border-2 rounded-lg py-0.5 w-full min-w-23">
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="border-b-2">A - Z {btn}</li>
-        <li className="">A - Z {btn}</li>
-      </ul> */}
     </>
   );
 };
