@@ -7,6 +7,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
   const handleClick = (btn: string) => {
     setSelectedBtn(btn);
     // setIsOpen(!isOpen);
+    !navbarOptions[btn] && console.log(btn);
   };
 
   const handleHover = (btn: string) => {
@@ -26,14 +27,13 @@ const NavbarBtns = ({ navbarOptions }: any) => {
       </button>
 
       {Object.keys(navbarOptions).map((btn) => (
-        <div className="relative w-full">
+        <div className="relative w-full" key={btn}>
           <button
             className={`border-2 rounded-xl py-0.5 w-full min-w-23 font-semibold ${
               isOpen && selectedBtn === btn && navbarOptions[btn]
                 ? "bg-white text-blue-700 border-blue-300"
                 : "text-white border-white"
             } hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75`}
-            key={btn}
             onClick={() => handleClick(btn)}
             onMouseEnter={() => {
               handleHover(btn);
