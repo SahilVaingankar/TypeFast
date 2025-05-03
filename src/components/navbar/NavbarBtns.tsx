@@ -17,7 +17,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     <>
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
-        onClick={() => handleClick("A-Z")}
+        onClick={() => setSelectedBtn("A-Z")}
         onMouseEnter={() => handleHover("A-Z")}>
         A-Z
       </button>
@@ -25,9 +25,17 @@ const NavbarBtns = ({ navbarOptions }: any) => {
       {Object.keys(navbarOptions).map((btn) => (
         <div className="relative w-full">
           <button
-            className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
+            className={`border-2 rounded-xl py-0.5 w-full min-w-23 font-semibold ${
+              isOpen && selectedBtn === btn && navbarOptions[btn]
+                ? "bg-white text-blue-700 border-blue-300"
+                : "text-white border-white"
+            } hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75`}
             key={btn}
-            onClick={() => handleClick(btn)}
+            onClick={
+              navbarOptions[btn]
+                ? () => handleClick(btn)
+                : () => setSelectedBtn(btn)
+            }
             onMouseEnter={() => handleHover(btn)}>
             {btn}
           </button>
