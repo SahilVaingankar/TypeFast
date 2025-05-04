@@ -5,6 +5,7 @@ const Timer = () => {
   const [running, setRunning] = useState(false);
   const startTime = useRef<number>(Date.now());
   const currentTime = useRef<number>(0);
+  const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
@@ -14,17 +15,25 @@ const Timer = () => {
       console.log("update");
       console.log(timer);
 
-      const elaspedTime = currentTime.current - startTime.current;
+      elaspedTime.current = currentTime.current - startTime.current;
 
-      const minutes = Math.floor((elaspedTime / (1000 * 60)) % 60)
+      const minutes = Math.floor(elaspedTime.current / 60000)
         .toString()
         .padStart(2, "0");
-      const seconds = Math.floor((elaspedTime / 1000) % 60)
+      const seconds = Math.floor((elaspedTime.current % 60000) / 1000)
         .toString()
         .padStart(2, "0");
-      const milliseconds = Math.floor(elaspedTime % 100)
+      const milliseconds = Math.floor((elaspedTime.current % 1000) / 10)
         .toString()
-        .padStart(2, "0");
+        .padStart(2, "0"); // const minutes = Math.floor((elaspedTime.current / (1000 * 60)) % 60)
+      //   .toString()
+      //   .padStart(2, "0");
+      // const seconds = Math.floor((elaspedTime.current / 1000) % 60)
+      //   .toString()
+      //   .padStart(2, "0");
+      // const milliseconds = Math.floor(elaspedTime.current % 100)
+      //   .toString()
+      //   .padStart(2, "0");
 
       setTimer(`${minutes} : ${seconds} : ${milliseconds}`);
     };
@@ -52,6 +61,8 @@ const Timer = () => {
   };
 
   const pause = () => {
+    // startTime.current = currentTime.current;
+    startTime.current = Date.now() - elaspedTime.current;
     setRunning(!running);
   };
 
