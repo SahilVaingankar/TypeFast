@@ -29,12 +29,16 @@ const Timer = () => {
       setTimer(`${minutes} : ${seconds} : ${milliseconds}`);
     };
 
-    updateRef.current = setInterval(update, 100);
+    if (!running) {
+      updateRef.current = setInterval(update, 100);
+    } else {
+      clearInterval(updateRef.current);
+    }
 
     return () => {
       clearInterval(updateRef.current);
     };
-  }, []);
+  }, [running]);
 
   const stop = () => {
     clearInterval(updateRef.current);
@@ -47,6 +51,10 @@ const Timer = () => {
     setTimer("00 : 00 : 00");
   };
 
+  const pause = () => {
+    setRunning(!running);
+  };
+
   return (
     <div>
       <div className="bg-black py-2 text-white flex justify-center items-center">
@@ -57,6 +65,9 @@ const Timer = () => {
       </button>
       <button className="bg-blue-700 p-2 m-2 text-white" onClick={restart}>
         restart
+      </button>
+      <button className="bg-blue-700 p-2 m-2 text-white" onClick={pause}>
+        pause
       </button>
     </div>
   );
