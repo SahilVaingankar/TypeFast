@@ -25,7 +25,8 @@ const Timer = () => {
         .padStart(2, "0");
       const milliseconds = Math.floor((elaspedTime.current % 1000) / 10)
         .toString()
-        .padStart(2, "0"); // const minutes = Math.floor((elaspedTime.current / (1000 * 60)) % 60)
+        .padStart(2, "0");
+      // const minutes = Math.floor((elaspedTime.current / (1000 * 60)) % 60)
       //   .toString()
       //   .padStart(2, "0");
       // const seconds = Math.floor((elaspedTime.current / 1000) % 60)
