@@ -7,35 +7,35 @@ const Timer = () => {
   const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
 
-  useEffect(() => {
-    const update = () => {
-      const currentTime = Date.now();
+  // useEffect(() => {
+  //   const update = () => {
+  //     const currentTime = Date.now();
 
-      elaspedTime.current = currentTime - startTime.current;
+  //     elaspedTime.current = currentTime - startTime.current;
 
-      const minutes = Math.floor(elaspedTime.current / 60000)
-        .toString()
-        .padStart(2, "0");
-      const seconds = Math.floor((elaspedTime.current % 60000) / 1000)
-        .toString()
-        .padStart(2, "0");
-      const milliseconds = Math.floor((elaspedTime.current % 1000) / 10)
-        .toString()
-        .padStart(2, "0");
+  //     const minutes = Math.floor(elaspedTime.current / 60000)
+  //       .toString()
+  //       .padStart(2, "0");
+  //     const seconds = Math.floor((elaspedTime.current % 60000) / 1000)
+  //       .toString()
+  //       .padStart(2, "0");
+  //     const milliseconds = Math.floor((elaspedTime.current % 1000) / 10)
+  //       .toString()
+  //       .padStart(2, "0");
 
-      setTimer(`${minutes} : ${seconds} : ${milliseconds}`);
-    };
+  //     setTimer(`${minutes} : ${seconds} : ${milliseconds}`);
+  //   };
 
-    if (!running) {
-      updateRef.current = setInterval(update, 100);
-    } else {
-      clearInterval(updateRef.current);
-    }
+  //   if (!running) {
+  //     updateRef.current = setInterval(update, 100);
+  //   } else {
+  //     clearInterval(updateRef.current);
+  //   }
 
-    return () => {
-      clearInterval(updateRef.current);
-    };
-  }, [running]);
+  //   return () => {
+  //     clearInterval(updateRef.current);
+  //   };
+  // }, [running]);
 
   const stop = () => {
     clearInterval(updateRef.current);
@@ -53,10 +53,12 @@ const Timer = () => {
   };
 
   return (
-    <div>
-      <div className="bg-black py-2 text-white flex justify-center items-center">
+    <header className="bg-black w-full">
+      {/* <header className="bg-black py-1 text-white flex justify-center items-center font-bold text-lg"> */}
+      <div className="py-2 text-white font-bold text-lg w-full text-center">
         {timer}
       </div>
+      {/* </header> */}
       {/* <button className="bg-blue-700 p-2 m-2 text-white" onClick={stop}>
         Stop
       </button>
@@ -66,7 +68,7 @@ const Timer = () => {
       <button className="bg-blue-700 p-2 m-2 text-white" onClick={pause}>
         pause
       </button> */}
-    </div>
+    </header>
   );
 };
 

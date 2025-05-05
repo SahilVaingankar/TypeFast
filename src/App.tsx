@@ -1,11 +1,11 @@
-import DisplayTimer from "./components/display/DisplayTimer";
+import Display from "./components/display/Display";
 import Navbar from "./components/navbar/Navbar";
 
 const App = () => {
   return (
-    <div>
-      {/* <Navbar /> */}
-      <DisplayTimer />
+    <div className="h-screen">
+      <Navbar />
+      <Display />
     </div>
   );
 };
