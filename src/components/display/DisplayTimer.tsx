@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-const Timer = () => {
-  const [timer, setTimer] = useState("00 : 00 : 00");
-  const [running, setRunning] = useState(false);
-  const startTime = useRef<number>(Date.now());
-  const elaspedTime = useRef<number>(0);
-  const updateRef = useRef<number | undefined>(undefined);
+const Timer = ({ timer }: any) => {
+  // const [timer, setTimer] = useState("00 : 00 : 00");
+  // const [running, setRunning] = useState(false);
+  // const startTime = useRef<number>(Date.now());
+  // const elaspedTime = useRef<number>(0);
+  // const updateRef = useRef<number | undefined>(undefined);
 
   // useEffect(() => {
   //   const update = () => {
@@ -37,20 +37,20 @@ const Timer = () => {
   //   };
   // }, [running]);
 
-  const stop = () => {
-    clearInterval(updateRef.current);
-    setTimer("00 : 00 : 00");
-  };
+  // const stop = () => {
+  //   clearInterval(updateRef.current);
+  //   setTimer("00 : 00 : 00");
+  // };
 
-  const restart = () => {
-    startTime.current = Date.now();
-    setTimer("00 : 00 : 00");
-  };
+  // const restart = () => {
+  //   startTime.current = Date.now();
+  //   setTimer("00 : 00 : 00");
+  // };
 
-  const pause = () => {
-    startTime.current = Date.now() - elaspedTime.current;
-    setRunning(!running);
-  };
+  // const pause = () => {
+  //   startTime.current = Date.now() - elaspedTime.current;
+  //   setRunning(!running);
+  // };
 
   return (
     <header className="bg-black w-full">

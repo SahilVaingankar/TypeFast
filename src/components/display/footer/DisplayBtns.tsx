@@ -2,20 +2,49 @@
 
 import { FaBackward, FaForward, FaPlay, FaRedo, FaStop } from "react-icons/fa";
 
-const DisplayBtns = () => {
+const DisplayBtns = ({
+  timer,
+  setTimer,
+  updateRef,
+  startTime,
+  elaspedTime,
+  running,
+  setRunning,
+}: any) => {
+  const stop = () => {
+    clearInterval(updateRef.current);
+    setTimer("00 : 00 : 00");
+  };
+
+  const restart = () => {
+    startTime.current = Date.now();
+    setTimer("00 : 00 : 00");
+  };
+
+  const pause = () => {
+    startTime.current = Date.now() - elaspedTime.current;
+    setRunning(!running);
+  };
+
   return (
     <footer className="bg-blue-700 w-full">
       <div className="py-2 flex justify-center items-center gap-0.5 h-full">
         <button className="h-11 w-13 bg-gray-400 border-2 border-white mr-10 lg:mr-15">
           <FaBackward className="m-auto" />
         </button>
-        <button className="h-10 w-10 bg-gray-400 border-2 border-white mr-20">
+        <button
+          className="h-10 w-10 bg-gray-400 border-2 border-white mr-20"
+          onClick={restart}>
           <FaRedo className="m-auto" />
         </button>
-        <button className="absolute h-14 w-14 border-2 border-white rounded-full">
+        <button
+          className="absolute h-14 w-14 border-2 border-white rounded-full"
+          onClick={pause}>
           <FaPlay className="m-auto text-white h-7 w-7 pl-1" />
         </button>
-        <button className="h-10 w-10 bg-gray-400 border-2 border-white">
+        <button
+          className="h-10 w-10 bg-gray-400 border-2 border-white"
+          onClick={stop}>
           <FaStop className="text-red-500 m-auto" />
         </button>
         <button className="h-11 w-13 bg-gray-400 border-2 border-white ml-10 lg:ml-15">
