@@ -29,7 +29,7 @@ const Display = () => {
       setTimer(`${minutes} : ${seconds} : ${milliseconds}`);
     };
 
-    if (!running) {
+    if (running) {
       updateRef.current = setInterval(update, 100);
     } else {
       clearInterval(updateRef.current);
@@ -46,7 +46,6 @@ const Display = () => {
       <DisplayScreen />
       <DisplayBtns
         {...{
-          timer,
           setTimer,
           updateRef,
           startTime,

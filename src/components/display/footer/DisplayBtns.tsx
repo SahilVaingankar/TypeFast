@@ -3,7 +3,6 @@
 import { FaBackward, FaForward, FaPlay, FaRedo, FaStop } from "react-icons/fa";
 
 const DisplayBtns = ({
-  timer,
   setTimer,
   updateRef,
   startTime,
@@ -13,12 +12,13 @@ const DisplayBtns = ({
 }: any) => {
   const stop = () => {
     clearInterval(updateRef.current);
+    elaspedTime.current = 0;
     setTimer("00 : 00 : 00");
+    setRunning(false);
   };
 
   const restart = () => {
-    startTime.current = Date.now();
-    setTimer("00 : 00 : 00");
+    stop();
   };
 
   const pause = () => {
