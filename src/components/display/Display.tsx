@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 const Display = () => {
   const [timer, setTimer] = useState("00 : 00 : 00");
   const [running, setRunning] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
@@ -43,7 +44,7 @@ const Display = () => {
   return (
     <section className="flex flex-col items-center min-w-1 grow-1 h-[calc(100vh-50px)] border-2 leading-[100%]">
       <DisplayTimer {...{ timer }} />
-      <DisplayScreen />
+      <DisplayScreen {...{ running, processing }} />
       <DisplayBtns
         {...{
           setTimer,
@@ -52,6 +53,7 @@ const Display = () => {
           elaspedTime,
           running,
           setRunning,
+          setProcessing,
         }}
       />
     </section>

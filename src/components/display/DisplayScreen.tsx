@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 
-const Screen = () => {
+const Screen = ({ running, processing }: any) => {
   const displayEventRef = useRef<HTMLElement | null>(null);
   const content = "xxxxxxxxxxxxx".split(""); // split into letters
   const [currentIndex, setCurrentIndex] = useState(0);
   const [typedStatus, setTypedStatus] = useState<string[]>(
     Array(content.length).fill(false)
   );
+  const [wrongLetter, setWrongLetter] = useState(false);
 
   const displayEvent = (e: KeyboardEvent) => {
     const expectedChar = content[currentIndex];
@@ -18,6 +19,11 @@ const Screen = () => {
       setTypedStatus(updatedStatus);
       setCurrentIndex((prev) => prev + 1);
     } else {
+      setWrongLetter(true);
+      setTimeout(() => {
+        setWrongLetter(false);
+      }, 300);
+
       const updatedStatus = [...typedStatus];
       updatedStatus[currentIndex] = "false";
       setTypedStatus(updatedStatus);
@@ -42,16 +48,24 @@ const Screen = () => {
       ref={displayEventRef}
       tabIndex={0}>
       <p className="font-[16px] p-[5px] text-gray-500 break-words min-h-[465px] w-full select-none">
-        {content.map((letter, i) => (
-          <span
-            key={i}
-            className={`
+        {processing ? (
+          content.map((letter, i) => (
+            <span
+              key={i}
+              className={`
               ${typedStatus[i] === "true" ? "text-green-600 font-bold" : ""}
-              ${typedStatus[i] === "false" ? "text-red-600" : ""}
+              ${
+                typedStatus[i] === "false" && wrongLetter
+                  ? "text-red-600 bg-red-600"
+                  : ""
+              }
             `}>
-            {letter}
-          </span>
-        ))}
+              {letter}
+            </span>
+          ))
+        ) : (
+          <span>Press Play To Start</span>
+        )}
       </p>
     </main>
   );

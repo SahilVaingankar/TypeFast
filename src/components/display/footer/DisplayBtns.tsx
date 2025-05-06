@@ -9,12 +9,14 @@ const DisplayBtns = ({
   elaspedTime,
   running,
   setRunning,
+  setProcessing,
 }: any) => {
   const stop = () => {
     clearInterval(updateRef.current);
     elaspedTime.current = 0;
     setTimer("00 : 00 : 00");
     setRunning(false);
+    setProcessing(false);
   };
 
   const restart = () => {
@@ -24,6 +26,7 @@ const DisplayBtns = ({
   const pause = () => {
     startTime.current = Date.now() - elaspedTime.current;
     setRunning(!running);
+    setProcessing(true);
   };
 
   return (
