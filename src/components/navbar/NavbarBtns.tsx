@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { RunningStateContext } from "../RunningStateProvider";
 
 const NavbarBtns = ({ navbarOptions }: any) => {
+  const { running, setRunning } = useContext(RunningStateContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedBtn, setSelectedBtn] = useState<string>("");
 
@@ -11,6 +13,9 @@ const NavbarBtns = ({ navbarOptions }: any) => {
   };
 
   const handleHover = (btn: string) => {
+    // if (!running) {
+    //   setIsOpen(false);
+    // }
     isOpen && setSelectedBtn(btn);
   };
 

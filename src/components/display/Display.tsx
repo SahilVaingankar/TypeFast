@@ -1,11 +1,12 @@
 import DisplayBtns from "./footer/DisplayBtns";
 import DisplayScreen from "./DisplayScreen";
 import DisplayTimer from "./DisplayTimer";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { RunningStateContext } from "../RunningStateProvider";
 
 const Display = () => {
   const [timer, setTimer] = useState("00 : 00 : 00");
-  const [running, setRunning] = useState(false);
+  const { running, setRunning } = useContext(RunningStateContext);
   const [processing, setProcessing] = useState(false);
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
@@ -54,6 +55,7 @@ const Display = () => {
           running,
           setRunning,
           setProcessing,
+          processing,
         }}
       />
     </section>

@@ -32,15 +32,17 @@ const Screen = ({ running, processing }: any) => {
 
   useEffect(() => {
     const element = displayEventRef.current;
-    if (element) {
+    if (running && element) {
       element.addEventListener("keydown", displayEvent);
       element.focus(); // optional: focus automatically
+    } else if (!running && element) {
+      element.blur();
     }
 
     return () => {
       element?.removeEventListener("keydown", displayEvent);
     };
-  }, [currentIndex, typedStatus]);
+  }, [currentIndex, typedStatus, running]);
 
   return (
     <main

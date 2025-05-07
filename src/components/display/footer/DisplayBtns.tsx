@@ -10,6 +10,7 @@ const DisplayBtns = ({
   running,
   setRunning,
   setProcessing,
+  processing,
 }: any) => {
   const stop = () => {
     clearInterval(updateRef.current);
