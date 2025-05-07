@@ -1,8 +1,6 @@
 import Display from "./components/display/Display";
 import Navbar from "./components/navbar/Navbar";
-import RunningStateProvider, {
-  RunningStateContext,
-} from "./components/RunningStateProvider";
+import RunningStateProvider from "./components/RunningStateProvider";
 
 const App = () => {
   return (

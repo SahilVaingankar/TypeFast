@@ -6,7 +6,15 @@ import { RunningStateContext } from "../RunningStateProvider";
 
 const Display = () => {
   const [timer, setTimer] = useState("00 : 00 : 00");
-  const { running, setRunning } = useContext(RunningStateContext);
+  const context = useContext(RunningStateContext);
+
+  if (!context) {
+    throw new Error(
+      "RunningStateContext must be used within a RunningStateProvider"
+    );
+  }
+
+  const { running, setRunning } = context;
   const [processing, setProcessing] = useState(false);
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
@@ -33,6 +41,7 @@ const Display = () => {
 
     if (running) {
       updateRef.current = setInterval(update, 100);
+      console.log(timer);
     } else {
       clearInterval(updateRef.current);
     }

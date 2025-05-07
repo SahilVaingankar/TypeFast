@@ -46,7 +46,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             }}>
             {btn}
           </button>
-          {isOpen && selectedBtn === btn && navbarOptions[btn] ? (
+          {!running && isOpen && selectedBtn === btn && navbarOptions[btn] ? (
             <ul className="absolute text-center top-10 left-0 border-2 rounded-lg py-0.5 w-full min-w-23 bg-gray-200 overflow-hidden">
               {navbarOptions[btn].slice(0, -1).map((option: string) => (
                 <li
