@@ -14,8 +14,15 @@ const Display = () => {
     );
   }
 
-  const { running, setRunning } = context;
-  const [processing, setProcessing] = useState(false);
+  const {
+    running,
+    setRunning,
+    processing,
+    setProcessing,
+    selectedBtn,
+    setSelectedBtn,
+  } = context;
+  // const [processing, setProcessing] = useState(false);
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
@@ -65,6 +72,7 @@ const Display = () => {
           setRunning,
           setProcessing,
           processing,
+          setSelectedBtn,
         }}
       />
     </section>

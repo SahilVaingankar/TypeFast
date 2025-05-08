@@ -11,6 +11,7 @@ const DisplayBtns = ({
   setRunning,
   setProcessing,
   processing,
+  setSelectedBtn,
 }: any) => {
   const stop = () => {
     clearInterval(updateRef.current);
@@ -26,6 +27,7 @@ const DisplayBtns = ({
 
   const pause = () => {
     startTime.current = Date.now() - elaspedTime.current;
+    setSelectedBtn("");
     setRunning(!running);
     setProcessing(true);
   };

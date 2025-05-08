@@ -2,21 +2,41 @@ import { useContext, useState } from "react";
 import { RunningStateContext } from "../RunningStateProvider";
 
 const NavbarBtns = ({ navbarOptions }: any) => {
-  const { running, setRunning } = useContext(RunningStateContext);
+  const context = useContext(RunningStateContext);
+
+  if (!context) {
+    throw new Error(
+      "RunningStateContext must be used within a RunningStateProvider"
+    );
+  }
+
+  const {
+    running,
+    setRunning,
+    processing,
+    setProcessing,
+    selectedBtn,
+    setSelectedBtn,
+  } = context;
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedBtn, setSelectedBtn] = useState<string>("");
+  // const [selectedBtn, setSelectedBtn] = useState<string>("");
 
   const handleClick = (btn: string) => {
-    setSelectedBtn(btn);
-    // setIsOpen(!isOpen);
-    !navbarOptions[btn] && console.log(btn);
+    if (!running && !processing) {
+      setSelectedBtn(btn);
+      // setIsOpen(!isOpen);
+      !navbarOptions[btn] && console.log(btn);
+    } else {
+      setSelectedBtn("");
+    }
   };
 
   const handleHover = (btn: string) => {
-    // if (!running) {
-    //   setIsOpen(false);
-    // }
-    isOpen && setSelectedBtn(btn);
+    if (!running && !processing) {
+      isOpen && setSelectedBtn(btn);
+    } else {
+      setSelectedBtn("");
+    }
   };
 
   return (
