@@ -59,7 +59,9 @@ const Display = () => {
   }, [running]);
 
   return (
-    <section className="flex flex-col items-center min-w-1 grow-1 h-[calc(100vh-50px)] border-2 leading-[100%]">
+    <section
+      className="flex flex-col items-center min-w-1 grow-1 h-[calc(100vh-50px)] border-2 leading-[100%]"
+      onClick={() => setSelectedBtn("")}>
       <DisplayTimer {...{ timer }} />
       <DisplayScreen {...{ running, processing }} />
       <DisplayBtns
