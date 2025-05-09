@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { RunningStateContext } from "../RunningStateProvider";
+import Modal from "../display/Modal";
 
 const NavbarBtns = ({ navbarOptions }: any) => {
   const context = useContext(RunningStateContext);
@@ -19,6 +20,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     setSelectedBtn,
   } = context;
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false);
   // const [selectedBtn, setSelectedBtn] = useState<string>("");
 
   const handleClick = (btn: string) => {
@@ -26,6 +28,9 @@ const NavbarBtns = ({ navbarOptions }: any) => {
       setSelectedBtn(btn);
       // setIsOpen(!isOpen);
       !navbarOptions[btn] && console.log(btn);
+    } else {
+      setRunning(false);
+      setModal(true);
     }
     //  else {
     //   setSelectedBtn("");
@@ -36,13 +41,24 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     if (!running && !processing) {
       setSelectedBtn(btn);
     }
-    //  else {
-    //   setSelectedBtn("");
-    // }
   };
 
   return (
     <>
+      {modal ? (
+        <div className="">
+          <Modal
+            onCancel={() => {
+              setSelectedBtn("");
+              setRunning(!running);
+              setProcessing(true);
+              setModal(false);
+            }}
+            onAccept={() => setRunning(false)}
+          />
+        </div>
+      ) : null}
+
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
         onClick={() => handleClick("A-z")}
