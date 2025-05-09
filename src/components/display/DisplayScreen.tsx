@@ -49,7 +49,7 @@ const Screen = ({ running, processing }: any) => {
       className="bg-blue-50 w-full flex flex-col grow overflow-auto"
       ref={displayEventRef}
       tabIndex={0}>
-      <p className="font-[16px] p-[5px] text-gray-500 break-words min-h-[465px] w-full select-none">
+      <p className="font-[16px] p-[5px] text-gray-500 break-words min-h-[450px] w-full select-none">
         {processing ? (
           content.map((letter, i) => (
             <span

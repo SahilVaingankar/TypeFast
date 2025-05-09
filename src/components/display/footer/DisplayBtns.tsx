@@ -13,16 +13,17 @@ const DisplayBtns = ({
   processing,
   setSelectedBtn,
 }: any) => {
-  const stop = () => {
+  const restart = () => {
     clearInterval(updateRef.current);
     elaspedTime.current = 0;
     setTimer("00 : 00 : 00");
     setRunning(false);
-    setProcessing(false);
+    // setProcessing(false);
   };
 
-  const restart = () => {
-    stop();
+  const stop = () => {
+    restart();
+    setProcessing(false);
   };
 
   const pause = () => {
