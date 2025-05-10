@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 
-const Screen = ({ running, processing }: any) => {
+const Screen = ({ running, processing, setRunning, timer,setTimer,
+          updateRef,
+          startTime,
+          setProcessing,
+          elaspedTime,
+ }: any) => {
   const displayEventRef = useRef<HTMLElement | null>(null);
   const content = "xxxxxxxxxxxxx".split(""); // split into letters
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,6 +14,7 @@ const Screen = ({ running, processing }: any) => {
     Array(content.length).fill(false)
   );
   const [wrongLetter, setWrongLetter] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const displayEvent = (e: KeyboardEvent) => {
     const expectedChar = content[currentIndex];
@@ -19,6 +25,11 @@ const Screen = ({ running, processing }: any) => {
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
       setCurrentIndex((prev) => prev + 1);
+      if (currentIndex === content.length - 1) {
+        // setRunning(false);
+        setRunning(false);
+        setShowModal(true);
+      }
     } else {
       setWrongLetter(true);
       setTimeout(() => {
@@ -50,7 +61,24 @@ const Screen = ({ running, processing }: any) => {
       className="bg-blue-50 w-full flex flex-col grow overflow-auto"
       ref={displayEventRef}
       tabIndex={0}>
-      {/* <Modal /> */}
+      {showModal ? (
+        <Modal
+          message={timer}
+          onCancel={() => {
+          clearInterval(updateRef.current);
+          elaspedTime.current = 0;
+          setTimer("00 : 00 : 00");
+                      setCurrentIndex(0);
+            setTypedStatus([]);
+
+                    setShowModal(false);
+
+                    setProcessing(false);
+
+          setRunning(false);
+          }}
+        />
+      ) : null}
       <p className="font-[16px] p-[5px] text-gray-500 break-words min-h-[450px] w-full select-none">
         {processing ? (
           content.map((letter, i) => (

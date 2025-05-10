@@ -48,6 +48,8 @@ const NavbarBtns = ({ navbarOptions }: any) => {
       {modal ? (
         <div className="">
           <Modal
+            message="This action will end the current session. Do you want to quite the
+          current game?"
             onCancel={() => {
               setSelectedBtn("");
               setRunning(!running);

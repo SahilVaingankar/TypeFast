@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { RunningStateContext } from "../RunningStateProvider";
 
-const Modal = ({ onCancel, onAccept }: any) => {
+const Modal = ({ message, onCancel, onAccept }: any) => {
   const context = useContext(RunningStateContext);
 
   if (!context) {
@@ -22,10 +22,7 @@ const Modal = ({ onCancel, onAccept }: any) => {
   return (
     <div className="absolute inset-0 h-full w-full flex justify-center items-center bg-black/50 z-50">
       <div className="bg-white w-[50%] flex flex-col p-2 rounded-xl">
-        <p>
-          This action will end the current session. Do you want to quite the
-          current game?
-        </p>
+        <p>{message}</p>
         <div className="mt-10 flex justify-end gap-2 w-full">
           <button
             className="px-4 py-2 text-white bg-gray-700 rounded-xl"
@@ -34,7 +31,7 @@ const Modal = ({ onCancel, onAccept }: any) => {
           </button>
           <button
             className="px-4 py-2 text-white bg-blue-700 rounded-xl"
-            onClick={onCancel}>
+            onClick={onAccept}>
             Ok
           </button>
         </div>
