@@ -18,6 +18,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     setProcessing,
     selectedBtn,
     setSelectedBtn,
+    startTime,
+    elaspedTime,
+    updateRef,
+    setTimer,
   } = context;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
@@ -29,7 +33,12 @@ const NavbarBtns = ({ navbarOptions }: any) => {
       // setIsOpen(!isOpen);
       !navbarOptions[btn] && console.log(btn);
     } else {
+      startTime.current = Date.now() - elaspedTime.current;
+      setSelectedBtn("");
       setRunning(false);
+      setProcessing(true);
+
+      // setRunning(false);
       setModal(true);
     }
     //  else {
@@ -51,19 +60,36 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             message="This action will end the current session. Do you want to quite the
           current game?"
             onCancel={() => {
+              startTime.current = Date.now() - elaspedTime.current;
               setSelectedBtn("");
-              setRunning(!running);
+              setRunning(true);
               setProcessing(true);
+
+              // setRunning(false);
+              setModal(false);
+
+              // clearInterval(updateRef.current);
+
+              // elaspedTime.current = 0;
+              // setSelectedBtn("");
+              // setRunning(!running);
+              // setProcessing(true);
+              // setModal(false);
+            }}
+            onAccept={() => {
+              clearInterval(updateRef.current);
+              elaspedTime.current = 0;
+              setTimer("00 : 00 : 00");
+              setRunning(false);
               setModal(false);
             }}
-            onAccept={() => setRunning(false)}
           />
         </div>
       ) : null}
 
       <button
         className="border-2 border-white rounded-xl py-0.5 w-full min-w-23 text-white font-semibold hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75"
-        onClick={() => handleClick("A-z")}
+        onClick={() => handleClick("A-Z")}
         onMouseEnter={() => {
           handleHover("A-Z");
           setIsOpen(true);

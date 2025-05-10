@@ -5,7 +5,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { RunningStateContext } from "../RunningStateProvider";
 
 const Display = () => {
-  const [timer, setTimer] = useState("00 : 00 : 00");
   const context = useContext(RunningStateContext);
 
   if (!context) {
@@ -21,11 +20,13 @@ const Display = () => {
     setProcessing,
     selectedBtn,
     setSelectedBtn,
+    startTime,
+    timer,
+    setTimer,
+    elaspedTime,
+    updateRef,
   } = context;
   // const [processing, setProcessing] = useState(false);
-  const startTime = useRef<number>(Date.now());
-  const elaspedTime = useRef<number>(0);
-  const updateRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const update = () => {
