@@ -23,6 +23,10 @@ const Display = () => {
     startTime,
     timer,
     setTimer,
+    currentIndex,
+    setCurrentIndex,
+    typedStatus,
+    setTypedStatus,
     elaspedTime,
     updateRef,
   } = context;
@@ -73,7 +77,12 @@ const Display = () => {
           setTimer,
           updateRef,
           startTime,
+          setProcessing,
           elaspedTime,
+          typedStatus,
+          setTypedStatus,
+          currentIndex,
+          setCurrentIndex,
         }}
       />
       <DisplayBtns

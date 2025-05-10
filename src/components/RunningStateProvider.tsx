@@ -9,6 +9,10 @@ export const RunningStateContext = createContext<{
   setSelectedBtn: React.Dispatch<React.SetStateAction<string>>;
   timer: string | number;
   setTimer: React.Dispatch<React.SetStateAction<string | number>>;
+  currentIndex: number;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
+  typedStatus: string[];
+  setTypedStatus: React.Dispatch<React.SetStateAction<string[]>>;
   startTime: RefObject<number>;
   elaspedTime: RefObject<number>;
   updateRef: RefObject<number | undefined>;
@@ -22,6 +26,8 @@ const RunningStateProvider = ({ children }: any) => {
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [typedStatus, setTypedStatus] = useState<string[]>([""]);
 
   return (
     <RunningStateContext.Provider
@@ -34,6 +40,10 @@ const RunningStateProvider = ({ children }: any) => {
         setSelectedBtn,
         timer,
         setTimer,
+        currentIndex,
+        setCurrentIndex,
+        typedStatus,
+        setTypedStatus,
         startTime,
         elaspedTime,
         updateRef,

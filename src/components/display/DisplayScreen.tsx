@@ -1,18 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 
-const Screen = ({ running, processing, setRunning, timer,setTimer,
-          updateRef,
-          startTime,
-          setProcessing,
-          elaspedTime,
- }: any) => {
+const Screen = ({
+  running,
+  processing,
+  setRunning,
+  timer,
+  setTimer,
+  updateRef,
+  startTime,
+  setProcessing,
+  elaspedTime,
+  typedStatus,
+  setTypedStatus,
+  currentIndex,
+  setCurrentIndex,
+}: any) => {
   const displayEventRef = useRef<HTMLElement | null>(null);
   const content = "xxxxxxxxxxxxx".split(""); // split into letters
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [typedStatus, setTypedStatus] = useState<string[]>(
-    Array(content.length).fill(false)
-  );
   const [wrongLetter, setWrongLetter] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -24,7 +29,7 @@ const Screen = ({ running, processing, setRunning, timer,setTimer,
       const updatedStatus = [...typedStatus];
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
-      setCurrentIndex((prev) => prev + 1);
+      setCurrentIndex((prev: any) => prev + 1);
       if (currentIndex === content.length - 1) {
         // setRunning(false);
         setRunning(false);
@@ -65,17 +70,39 @@ const Screen = ({ running, processing, setRunning, timer,setTimer,
         <Modal
           message={timer}
           onCancel={() => {
-          clearInterval(updateRef.current);
-          elaspedTime.current = 0;
-          setTimer("00 : 00 : 00");
-                      setCurrentIndex(0);
-            setTypedStatus([]);
+            clearInterval(updateRef.current);
 
-                    setShowModal(false);
+            setTypedStatus([""]);
+            setCurrentIndex(0);
+            elaspedTime.current = 0;
+            setTimer("00 : 00 : 00");
+            setRunning(false);
+            setProcessing(false);
+            setShowModal(false);
 
-                    setProcessing(false);
+            // setCurrentIndex(0);
+            // setTypedStatus([""]);
+            // clearInterval(updateRef.current);
+            // elaspedTime.current = 0;
+            // setTimer("00 : 00 : 00");
+            // setCurrentIndex(0);
+            // setTypedStatus([]);
 
-          setRunning(false);
+            // setShowModal(false);
+
+            // setProcessing(false);
+
+            // setRunning(false);
+          }}
+          onAccept={() => {
+            clearInterval(updateRef.current);
+
+            setTypedStatus([""]);
+            setCurrentIndex(0);
+            elaspedTime.current = 0;
+            setTimer("00 : 00 : 00");
+            setRunning(false);
+            setShowModal(false);
           }}
         />
       ) : null}

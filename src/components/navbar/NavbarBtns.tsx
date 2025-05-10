@@ -22,6 +22,8 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     elaspedTime,
     updateRef,
     setTimer,
+    setTypedStatus,
+    setCurrentIndex,
   } = context;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
@@ -78,9 +80,13 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             }}
             onAccept={() => {
               clearInterval(updateRef.current);
+
+              setTypedStatus([""]);
+              setCurrentIndex(0);
               elaspedTime.current = 0;
               setTimer("00 : 00 : 00");
               setRunning(false);
+              setProcessing(false);
               setModal(false);
             }}
           />
