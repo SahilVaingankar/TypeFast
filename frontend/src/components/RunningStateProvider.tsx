@@ -38,9 +38,9 @@ const RunningStateProvider = ({ children }: any) => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
-  const [selectedBtn, setSelectedBtn] = useState("");
-  const [clickedBtn, setClickedBtn] = useState("");
-  const [request, setRequest] = useState("");
+  const [selectedBtn, setSelectedBtn] = useState("A-Z");
+  const [clickedBtn, setClickedBtn] = useState("A-Z");
+  const [request, setRequest] = useState("A-Z");
   const [timer, setTimer] = useState<string | number>("00 : 00 : 00");
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);

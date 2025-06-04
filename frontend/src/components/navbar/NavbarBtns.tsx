@@ -64,9 +64,11 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     } else {
       if (!running && !processing) {
         !isNavbarOpen && setIsNavbarOpen(true);
-        setRequest("");
+        // setRequest("");
         setSelectedBtn(btn);
         setClickedBtn(btn);
+        setRequest(navbarOptions[btn][0]);
+        // console.log("clicked btn : ", clickedBtn);
       } else {
         startTime.current = Date.now() - elaspedTime.current;
         // setRequest("");
@@ -180,13 +182,18 @@ const NavbarBtns = ({ navbarOptions }: any) => {
             <ul className="absolute text-center top-10 left-0 border-2 rounded-lg py-0.5 w-full min-w-23 bg-gray-200 overflow-hidden z-100">
               {navbarOptions[btn].slice(0, -1).map((option: string) => (
                 <li
-                  className={`border-b-2 ${
+                  className={`border-b-2 cursor-pointer ${
                     request === option
                       ? "bg-gray-300"
                       : "bg-white hover:bg-gray-100"
                   }`}
                   key={option}
-                  onClick={() => setRequest(option)}>
+                  onClick={() => {
+                    setRequest(option), setIsNavbarOpen(false);
+                  }}
+
+                  // onClick={() => setRequest(option)}
+                >
                   {option}
                 </li>
               ))}
@@ -196,9 +203,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
                     ? "bg-gray-300"
                     : "bg-white hover:bg-gray-100"
                 } mb-[-2]`}
-                onClick={() =>
-                  setRequest(navbarOptions[btn][navbarOptions[btn].length - 1])
-                }>
+                onClick={() => {
+                  setRequest(navbarOptions[btn][navbarOptions[btn].length - 1]),
+                    setIsNavbarOpen(false);
+                }}>
                 {navbarOptions[btn][navbarOptions[btn].length - 1]}
               </li>
             </ul>

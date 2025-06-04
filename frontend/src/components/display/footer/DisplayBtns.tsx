@@ -31,6 +31,7 @@ const DisplayBtns = ({
   setCurrentIndex,
   setTypedStatus,
   request,
+  setRequest,
   idIndex,
   setIdIndex,
 }: any) => {
@@ -134,7 +135,9 @@ const DisplayBtns = ({
           : request.slice(-5);
         setClickedBtn(current[0].toUpperCase() + current.slice(1));
         setSelectedBtn(current[0].toUpperCase() + current.slice(1));
-        console.log("kwy : ", current[0].toUpperCase() + current.slice(1));
+        setRequest(id[idIndex + 1].key);
+
+        console.log("key : ", current[0].toUpperCase() + current.slice(1));
       } catch (err) {
         console.error("Request failed:", err);
       }
@@ -164,7 +167,13 @@ const DisplayBtns = ({
         setContent(res.data.data.article);
         setIdIndex((Index: number) => Index - 1);
         setLoading(false);
-        setClickedBtn(id[idIndex - 1].key);
+        const current = id[idIndex - 1]
+          ? id[idIndex - 1].key.slice(-5)
+          : request.slice(-5);
+
+        setClickedBtn(current[0].toUpperCase() + current.slice(1));
+        setSelectedBtn(current[0].toUpperCase() + current.slice(1));
+        setRequest(id[idIndex - 1].key);
       } catch (err) {
         console.error("Request failed:", err);
       }
