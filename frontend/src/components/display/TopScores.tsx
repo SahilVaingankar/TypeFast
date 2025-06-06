@@ -13,10 +13,12 @@ const TopScores = ({ topScores }: any) => {
         Top Scores In This Category
       </h3>
 
-      <div className="flex w-full justify-between">
+      <div className={"flex w-full justify-center max-h-100 gap-5"}>
         {topScores.map((score: any, i: any) => (
-          <div className="text-center bg-gray-100 p-1 rounded-md" key={i}>
-            <img src={images[i]} alt="img" />
+          <div
+            className="text-center bg-gray-100 p-1 rounded-md max-h-90"
+            key={i}>
+            <img src={images[i]} alt="img" className="max-h-50" />
             <p className="font-bold">
               {i + 1}. {score.name}
             </p>
