@@ -118,7 +118,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
               // setModal(false);
             }}
             onAccept={() => {
-              clickedBtn.endsWith("s") && setIsNavbarOpen(true);
+              selectedBtn.endsWith("s") && setIsNavbarOpen(true);
 
               clearInterval(updateRef.current);
 
@@ -130,7 +130,11 @@ const NavbarBtns = ({ navbarOptions }: any) => {
               setProcessing(false);
               setModal(false);
               setClickedBtn(selectedBtn);
-              setRequest(selectedBtn);
+              if (selectedBtn.endsWith("s")) {
+                setRequest(navbarOptions[selectedBtn][0]);
+              } else {
+                setRequest(selectedBtn);
+              }
             }}
           />
         </div>
