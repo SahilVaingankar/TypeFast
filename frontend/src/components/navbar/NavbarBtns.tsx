@@ -206,7 +206,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
                   request === navbarOptions[btn][navbarOptions[btn].length - 1]
                     ? "bg-gray-300"
                     : "bg-white hover:bg-gray-100"
-                } mb-[-2]`}
+                } mb-[-2] cursor-pointer`}
                 onClick={() => {
                   setRequest(navbarOptions[btn][navbarOptions[btn].length - 1]),
                     setIsNavbarOpen(false);

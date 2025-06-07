@@ -51,7 +51,7 @@ const ArticleSchema = new Schema({
   "68 - 72 lines": [ArticleEntrySchema],
   "78 - 82 lines": [ArticleEntrySchema],
   "88 - 92 lines": [ArticleEntrySchema],
-  "above 100 lines": [ArticleEntrySchema],
+  "above 92 lines": [ArticleEntrySchema],
   "a-z": [ArticleEntrySchema],
   "5 - 15 words": [ArticleEntrySchema],
   "20 - 30 words": [ArticleEntrySchema],
@@ -161,7 +161,9 @@ app.post(
           const ids = data[key].length;
           console.log(data[key].length);
 
-          const randomIndex = Math.floor(Math.random() * ids);
+          const items = data[key]; // array of objects with 'id'
+          const randomItem = items[Math.floor(Math.random() * items.length)];
+          const randomIndex = randomItem.id;
           // const randomId = ids[randomIndex];
           console.log(randomIndex);
 
@@ -269,6 +271,7 @@ app.post(
       // const incomingTimeSec = timeStringToSeconds(time);
       let existingCategory = await Scores.findOne({ category: category });
       const topscores = async () => {
+        existingCategory = await Scores.findOne({ category: category });
         try {
           topScores = existingCategory
             ? await Scores.aggregate([
