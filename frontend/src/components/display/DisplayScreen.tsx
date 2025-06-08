@@ -145,9 +145,15 @@ const Screen = ({
                   you competed the challenge in{" "}
                   <span className="bg-gray-200">{timer}</span>, your previous
                   best time was{" "}
-                  <span className="bg-gray-200">{data.bestTime}</span>, Press ok
-                  to play again keep your hands on the keyboard the game will
-                  restart in a second.
+                  <span className="bg-gray-200">{data.bestTime}</span>,{" "}
+                  <span className="text-green-600">
+                    <span className="bg-green-200">Press ok</span> to play
+                    again, keep your hands on the keyboard the{" "}
+                    <span className="bg-green-200">
+                      game will restart in a second
+                    </span>
+                    .
+                  </span>
                 </p>
               </div>
 
