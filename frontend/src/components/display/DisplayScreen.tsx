@@ -127,9 +127,15 @@ const Screen = ({
             data.message === "new" ? (
               <div>
                 {data?.topScores && <TopScores topScores={data.topScores} />}
-                <p className="mt-5">
-                  you competed the challenge your new best time is {timer}, your
-                  previous best time was {data.prevTime}
+                <p className="mt-5 font-semibold leading-5">
+                  you competed the challenge your new best time is{" "}
+                  <span className="bg-gray-200 whitespace-nowrap">{timer}</span>
+                  , your previous best time was{" "}
+                  <span className="bg-gray-200 whitespace-nowrap">
+                    {data.prevTime}
+                  </span>
+                  , Press ok to play again keep your hands on the keyboard the
+                  game will restart in a second.
                 </p>
               </div>
             ) : (
@@ -139,7 +145,9 @@ const Screen = ({
                   you competed the challenge in{" "}
                   <span className="bg-gray-200">{timer}</span>, your previous
                   best time was{" "}
-                  <span className="bg-gray-200">{data.bestTime}</span>
+                  <span className="bg-gray-200">{data.bestTime}</span>, Press ok
+                  to play again keep your hands on the keyboard the game will
+                  restart in a second.
                 </p>
               </div>
 
@@ -181,6 +189,10 @@ const Screen = ({
             setTimer("00 : 00 : 00");
             setRunning(false);
             setShowModal(false);
+            setTimeout(() => {
+              startTime.current = Date.now();
+              setRunning(true);
+            }, 1000);
           }}
         />
       ) : null}

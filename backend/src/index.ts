@@ -362,16 +362,19 @@ app.post(
         const sentTime = timeStringToSeconds(time);
 
         const storedTime = timeStringToSeconds(userExists.bestTime);
+        const oldTime = userExists.bestTime;
         console.log(userExists.bestTime);
 
+        console.log("sentTime : ", sentTime, " < storedTime :", storedTime);
+
         if (sentTime < storedTime) {
-          // userExists.bestTime = time;
+          userExists.bestTime = time;
           await existingCategory.save();
           await topscores();
           res.status(200).json({
             message: `new`,
             bestTime: time,
-            prevTime: userExists.bestTime,
+            prevTime: oldTime,
             topScores,
           });
         } else {
