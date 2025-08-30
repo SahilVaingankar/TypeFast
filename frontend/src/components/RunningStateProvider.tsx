@@ -1,4 +1,4 @@
-import { createContext, Dispatch, RefObject, useRef, useState } from "react";
+import { createContext, RefObject, useRef, useState } from "react";
 
 export const RunningStateContext = createContext<{
   running: boolean;

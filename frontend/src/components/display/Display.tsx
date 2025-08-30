@@ -1,7 +1,7 @@
 import DisplayBtns from "./footer/DisplayBtns";
 import DisplayScreen from "./DisplayScreen";
 import DisplayTimer from "./DisplayTimer";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
 import { RunningStateContext } from "../RunningStateProvider";
 
 const Display = () => {
@@ -20,7 +20,6 @@ const Display = () => {
     setIsNavbarOpen,
     processing,
     setProcessing,
-    selectedBtn,
     setSelectedBtn,
     setClickedBtn,
     startTime,

@@ -11,7 +11,6 @@ import {
 } from "react-icons/fa";
 
 const DisplayBtns = ({
-  isNavbarOpen,
   setIsNavbarOpen,
   setTimer,
   updateRef,
@@ -107,7 +106,7 @@ const DisplayBtns = ({
 
   const forward = () => {
     // if (id.length === 1 && id[0].key === "A-Z") return;
-
+    stop();
     console.log("id for forwards request", id);
     console.log("request sent for forwards", id[idIndex + 1]);
     console.log("indexId :", idIndex + 1);

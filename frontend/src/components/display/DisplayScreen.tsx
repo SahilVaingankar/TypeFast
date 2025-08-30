@@ -70,10 +70,49 @@ const Screen = ({
     console.log("listning");
 
     const expectedChar = content[currentIndex];
-    const pressedKey = e.key;
+    console.log(expectedChar);
 
+    const pressedKey = e.key;
+    console.log(pressedKey);
+
+    const updatedStatus = [...typedStatus];
+    if (pressedKey === "Enter") {
+      if (expectedChar === "\n") {
+        console.log(expectedChar);
+
+        updatedStatus[currentIndex] = "true";
+        setTypedStatus(updatedStatus);
+        setCurrentIndex((prev: any) => prev + 2);
+      } else {
+        setWrongLetter(true);
+        setTimeout(() => {
+          setWrongLetter(false);
+        }, 300);
+
+        const updatedStatus = [...typedStatus];
+        updatedStatus[currentIndex] = "false";
+        setTypedStatus(updatedStatus);
+      }
+    }
+    if (pressedKey === "Tab") {
+      if (expectedChar === "\t") {
+        console.log(expectedChar);
+
+        updatedStatus[currentIndex] = "true";
+        setTypedStatus(updatedStatus);
+        setCurrentIndex((prev: any) => prev + 2);
+      } else {
+        setWrongLetter(true);
+        setTimeout(() => {
+          setWrongLetter(false);
+        }, 300);
+
+        const updatedStatus = [...typedStatus];
+        updatedStatus[currentIndex] = "false";
+        setTypedStatus(updatedStatus);
+      }
+    }
     if (pressedKey === expectedChar) {
-      const updatedStatus = [...typedStatus];
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
       setCurrentIndex((prev: any) => prev + 1);
@@ -208,7 +247,7 @@ const Screen = ({
             <span>Loading...</span>
           ) : (
             content.split("").map((letter: string, i: number) => (
-              <span
+              <code
                 key={i}
                 className={`
               ${typedStatus[i] === "true" ? "text-green-600 font-bold" : ""}
@@ -217,9 +256,10 @@ const Screen = ({
                   ? "text-red-600 bg-red-600"
                   : ""
               }
+              whitespace-pre-wrap
             `}>
-                {letter}
-              </span>
+                {letter === "\t" ? "\u00A0\u00A0\u00A0" : letter}
+              </code>
             ))
           )
         ) : (
