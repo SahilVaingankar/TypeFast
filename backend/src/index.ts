@@ -2,7 +2,6 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose, { Schema, Document } from "mongoose";
-import { log } from "console";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -12,7 +11,7 @@ const PORT = process.env.PORT || 5500;
 
 app.use(
   cors({
-    origin: "type-fast-puce.vercel.app", // frontend port
+    origin: "https://type-fast-puce.vercel.app", // frontend port
     credentials: true,
   })
 );
@@ -30,10 +29,6 @@ interface ArticleEntry {
   id: number;
   article: string;
 }
-
-// export interface ArticleData extends Document {
-//   data: Map<string, ArticleEntry[]>;
-// }
 
 const ArticleEntrySchema = new Schema({
   id: { type: Number, required: true },
@@ -60,13 +55,6 @@ const ArticleSchema = new Schema({
   "above 90 words": [ArticleEntrySchema],
   code: [ArticleEntrySchema],
 });
-// const ArticleSchema = new Schema<ArticleData>({
-//   data: {
-//     type: Map,
-//     of: [ArticleEntrySchema],
-//     required: true,
-//   },
-// });
 
 const Article = mongoose.model("articles", ArticleSchema);
 
@@ -100,16 +88,6 @@ const Scores = mongoose.model<ScoresDocument>("Scores", scoresSchema);
 
 let topScores: any = 0;
 
-// const x = async () => {
-//   const ids = await Article.find({ data: "10 words" });
-//   console.log(ids);
-// };
-
-// if (x) {
-//   console.log(x);
-// }
-
-// Corrected route with proper return typing
 app.post(
   "/handle_request",
   async (req: Request, res: Response): Promise<void> => {
@@ -145,10 +123,6 @@ app.post(
             {},
             { [`${newMessage.toLowerCase()}.id`]: 1, _id: 0 }
           );
-          console.log(data);
-          console.log(newMessage);
-
-          // const key = data.get(newMessage);
 
           if (!data || !Array.isArray((data as any)[newMessage])) {
             console.error("IDs are missing or not an array.");
@@ -161,66 +135,41 @@ app.post(
           const ids = data[key].length;
           console.log(data[key].length);
 
-          const items = data[key]; // array of objects with 'id'
+          const items = data[key];
           const randomItem = items[Math.floor(Math.random() * items.length)];
           const randomIndex = randomItem.id;
-          // const randomId = ids[randomIndex];
           console.log(randomIndex);
 
           const query = `${key}.id`;
 
           const article = await Article.findOne(
             { [`${key}`]: { $elemMatch: { id: randomIndex } } },
-            { [`${key}.$`]: 1, _id: 0 } // ✅ projection with positional operator
+            { [`${key}.$`]: 1, _id: 0 }
           );
           res.json({ data: article?.[key][0] });
           console.log(article?.[key][0]);
           console.log(article);
         }
       } else {
-        console.log("running else");
-
-        // const key = message as keyof typeof data;
         const id = message.id;
         const key = message.key.toLocaleLowerCase();
-
-        console.log(id);
-        console.log("key :", message.key);
-
         const query = `${message}.id`;
 
         const article = await Article.findOne(
           { [`${key}`]: { $elemMatch: { id: id } } },
-          { [`${key}.$`]: 1, _id: 0 } // ✅ projection with positional operator
+          { [`${key}.$`]: 1, _id: 0 }
         );
         console.log(article);
         console.log((article as any)?.[key][0]);
 
         res.json({ data: (article as any)?.[key][0] });
       }
-
-      // if (!data || !Array.isArray(data[msg])) {
-      //   console.error("IDs are missing or not an array.");
-      //   return;
-      // }
-
-      // res.json({ data: data[msg][0] });
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: "Server error" });
     }
   }
 );
-
-// app.post(
-//   "/handle_login",
-//   async (req: Request, res: Response): Promise<void> => {
-//     const username = req.cookies.username;
-//     if (username) {
-//       res.json({ username });
-//     }
-//   }
-// );
 
 app.post(
   "/handle_username",
@@ -235,7 +184,7 @@ app.post(
         console.log("exists");
       } else {
         await User.create({ username });
-        res.send("username added successfully"); // Don't forget this
+        res.send("username added successfully");
       }
     } else {
       res.status(500).json({ error: "Server error" });
@@ -243,14 +192,6 @@ app.post(
   }
 );
 
-// import express, { Request, Response } from "express";
-// import mongoose from "mongoose";
-// import User from "./models/User"; // Assuming you have your User model exported
-
-// const app = express();
-// app.use(express.json());
-
-// Helper to convert hh:mm:ss to total seconds
 function timeStringToSeconds(timeStr: string): number {
   const [hours, minutes, seconds] = timeStr.split(":").map(Number);
   return hours * 3600 + minutes * 60 + seconds;
@@ -268,7 +209,6 @@ app.post(
         return;
       }
 
-      // const incomingTimeSec = timeStringToSeconds(time);
       let existingCategory = await Scores.findOne({ category: category });
       const topscores = async () => {
         existingCategory = await Scores.findOne({ category: category });
@@ -330,7 +270,6 @@ app.post(
       };
 
       if (!existingCategory) {
-        // Create new user with initial score
         const scores = new Scores({
           category,
           scores: [{ name: username, bestTime: time }],
@@ -396,5 +335,5 @@ app.post(
 );
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running`);
 });
