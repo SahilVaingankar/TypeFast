@@ -10,15 +10,6 @@ const Modal = ({ message, onCancel, onAccept }: any) => {
     );
   }
 
-  const {
-    running,
-    setRunning,
-    processing,
-    setProcessing,
-    selectedBtn,
-    setSelectedBtn,
-  } = context;
-
   return (
     <div className="absolute inset-0 h-full w-full flex justify-center items-center bg-black/50 z-50">
       <div className="bg-white w-[60%] flex flex-col p-2 rounded-xl">
