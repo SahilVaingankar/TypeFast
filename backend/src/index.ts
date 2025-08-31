@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5500;
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend port
+    origin: "type-fast-puce.vercel.app", // frontend port
     credentials: true,
   })
 );
