@@ -49,9 +49,12 @@ const DisplayBtns = ({
   const pause = () => {
     const article = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/handle_request", {
-          message: request,
-        });
+        const res = await axios.post(
+          "https://typefast-production.up.railway.app/handle_request",
+          {
+            message: request,
+          }
+        );
 
         setContent(res.data.data.article);
         setId((items: { key: string; id: number }[] | []) => [
@@ -81,9 +84,12 @@ const DisplayBtns = ({
     const article = async () => {
       try {
         const requestToSend = id[idIndex + 1] ? id[idIndex + 1] : request;
-        const res = await axios.post("http://localhost:5000/handle_request", {
-          message: requestToSend,
-        });
+        const res = await axios.post(
+          "https://typefast-production.up.railway.app/handle_request",
+          {
+            message: requestToSend,
+          }
+        );
 
         if (!id[idIndex + 1]) {
           setId((items: { key: string; id: number }[] | []) => [
@@ -117,9 +123,12 @@ const DisplayBtns = ({
   const backward = () => {
     const article = async () => {
       try {
-        const res = await axios.post("http://localhost:5000/handle_request", {
-          message: id[idIndex - 1],
-        });
+        const res = await axios.post(
+          "https://typefast-production.up.railway.app/handle_request",
+          {
+            message: id[idIndex - 1],
+          }
+        );
         setContent(res.data.data.article);
         setIdIndex((Index: number) => Index - 1);
         setLoading(false);

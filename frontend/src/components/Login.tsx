@@ -2,30 +2,34 @@ import axios from "axios";
 import { useState } from "react";
 
 const Login = () => {
-  const [user, setUser] = useState(null);
-  const [isPending, setIsPending] = useState(false);
+  // const [user, setUser] = useState(null);
+  // const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (formData: any) => {
-    setIsPending(true);
-    setUser(null);
+    // setIsPending(true);
+    // setUser(null);
     setError(null);
 
     const username = formData.get("username");
 
     try {
-      const res = await axios.post("http://localhost:5000/handle_username", {
-        username,
-      });
+      const res = await axios.post(
+        "https://typefast-production.up.railway.app/handle_username",
+        {
+          username,
+        }
+      );
       if (res.status === 200) {
         localStorage.setItem("username", username);
         window.location.reload();
       }
     } catch (error: any) {
       setError(error);
-    } finally {
-      setIsPending(false);
     }
+    // finally {
+    //   setIsPending(false);
+    // }
   };
 
   return (

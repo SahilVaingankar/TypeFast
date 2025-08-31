@@ -31,12 +31,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     setTypedStatus,
     setCurrentIndex,
   } = context;
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modal, setModal] = useState<boolean>(false);
-  // const [selectedBtn, setSelectedBtn] = useState<string>("");
 
   const handleClick = (btn: string) => {
-    // setRequest("");
     if (btn === "Code" || btn === "A-Z") {
       if (!running && !processing) {
         setSelectedBtn(btn);
@@ -44,12 +42,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
         setRequest(btn);
       } else {
         startTime.current = Date.now() - elaspedTime.current;
-        // setRequest("");
         setSelectedBtn(btn);
         setRunning(false);
         setProcessing(true);
 
-        // setRunning(false);
         setModal(true);
       }
     } else {
@@ -124,9 +120,10 @@ const NavbarBtns = ({ navbarOptions }: any) => {
                 : "text-white border-white"
             } hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75`}
             onClick={() => handleClick(btn)}
-            onBlur={() => {
-              setIsOpen(false);
-            }}>
+            // onBlur={() => {
+            //   setIsOpen(false);
+            // }}
+          >
             {btn.toLowerCase().slice(-5) === request.slice(-5)
               ? btn.slice(0, -5) + " (" + request + ")"
               : btn}

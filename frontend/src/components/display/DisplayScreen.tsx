@@ -36,11 +36,14 @@ const Screen = ({
       try {
         setRunning(false);
         const username = localStorage.getItem("username");
-        const res = await axios.post("http://localhost:5000/display_scores", {
-          username,
-          category: request,
-          time: timer,
-        });
+        const res = await axios.post(
+          "https://typefast-production.up.railway.app/display_scores",
+          {
+            username,
+            category: request,
+            time: timer,
+          }
+        );
         setData(res.data);
         setShowModal(true);
       } catch (error) {
