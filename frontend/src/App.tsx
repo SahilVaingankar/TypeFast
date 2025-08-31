@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import Display from "./components/display/Display";
 import Navbar from "./components/navbar/Navbar";
 import RunningStateProvider from "./components/RunningStateProvider";
-import axios from "axios";
 import Login from "./components/Login";
 
 const App = () => {
