@@ -80,8 +80,6 @@ const RunningStateProvider = ({ children }: any) => {
         setId,
         idIndex,
         setIdIndex,
-        // loading,
-        // setLoading,
         startTime,
         elaspedTime,
         updateRef,

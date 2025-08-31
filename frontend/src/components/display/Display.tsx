@@ -65,7 +65,6 @@ const Display = () => {
 
     if (running && !loading) {
       updateRef.current = setInterval(update, 100);
-      console.log(timer);
     } else {
       clearInterval(updateRef.current);
     }

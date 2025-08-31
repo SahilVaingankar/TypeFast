@@ -5,8 +5,6 @@ import top3 from "./images/top3.jpg";
 const images = [top1, top2, top3];
 
 const TopScores = ({ topScores }: any) => {
-  console.log(topScores);
-
   return (
     <>
       <h3 className="text-center font-semibold mb-2">

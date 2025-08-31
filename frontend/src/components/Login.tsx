@@ -1,11 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Login = () => {
   const [user, setUser] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
-  console.log(error);
 
   const handleSubmit = async (formData: any) => {
     setIsPending(true);
@@ -20,7 +19,7 @@ const Login = () => {
       });
       if (res.status === 200) {
         localStorage.setItem("username", username);
-        window.location.reload(); // ✅ Reload to re-check session in App
+        window.location.reload();
       }
     } catch (error: any) {
       setError(error);

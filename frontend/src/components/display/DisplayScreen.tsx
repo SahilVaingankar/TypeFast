@@ -32,18 +32,15 @@ const Screen = ({
   useEffect(() => {
     const getScores = async () => {
       setRunning(false);
-      console.log(timer);
 
       try {
         setRunning(false);
         const username = localStorage.getItem("username");
-        console.log("sent to Server : ", timer);
         const res = await axios.post("http://localhost:5000/display_scores", {
           username,
           category: request,
           time: timer,
         });
-        console.log(res.data);
         setData(res.data);
         setShowModal(true);
       } catch (error) {
@@ -54,32 +51,18 @@ const Screen = ({
       getScores();
       setGameOver(false);
     }
-
-    // return () => {
-    //   setGameOver(false);
-    // };
   }, [gameOver]);
-
-  // const [showModal, setShowModal] = useState(false);
-
-  // console.log(content.split(""));
-  // console.log(running);
 
   const displayEvent = (e: KeyboardEvent) => {
     e.preventDefault();
-    console.log("listning");
 
     const expectedChar = content[currentIndex];
-    console.log(expectedChar);
 
     const pressedKey = e.key;
-    console.log(pressedKey);
 
     const updatedStatus = [...typedStatus];
     if (pressedKey === "Enter") {
       if (expectedChar === "\n") {
-        console.log(expectedChar);
-
         updatedStatus[currentIndex] = "true";
         setTypedStatus(updatedStatus);
         setCurrentIndex((prev: any) => prev + 2);
@@ -96,8 +79,6 @@ const Screen = ({
     }
     if (pressedKey === "Tab") {
       if (expectedChar === "\t") {
-        console.log(expectedChar);
-
         updatedStatus[currentIndex] = "true";
         setTypedStatus(updatedStatus);
         setCurrentIndex((prev: any) => prev + 2);
@@ -117,11 +98,8 @@ const Screen = ({
       setTypedStatus(updatedStatus);
       setCurrentIndex((prev: any) => prev + 1);
       if (currentIndex === content.length - 1) {
-        // setRunning(false);
         setRunning(false);
         setGameOver(true);
-
-        // setShowModal(true);
       }
     } else {
       setWrongLetter(true);
@@ -138,11 +116,8 @@ const Screen = ({
 
   useEffect(() => {
     const element = displayEventRef.current;
-    console.log(element);
 
     if (running && element) {
-      console.log("listning");
-
       element.addEventListener("keydown", displayEvent);
       element.focus(); // optional: focus automatically
     } else if (!running && element) {
@@ -195,8 +170,6 @@ const Screen = ({
                   </span>
                 </p>
               </div>
-
-              // `you competed the challenge your new best time is ${timer}, your previous best time was  ${data.prevTime}`
             )
           }
           onCancel={() => {
@@ -209,20 +182,6 @@ const Screen = ({
             setRunning(false);
             setProcessing(false);
             setShowModal(false);
-
-            // setCurrentIndex(0);
-            // setTypedStatus([""]);
-            // clearInterval(updateRef.current);
-            // elaspedTime.current = 0;
-            // setTimer("00 : 00 : 00");
-            // setCurrentIndex(0);
-            // setTypedStatus([]);
-
-            // setShowModal(false);
-
-            // setProcessing(false);
-
-            // setRunning(false);
           }}
           onAccept={() => {
             setIsNavbarOpen(true);

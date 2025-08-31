@@ -1,5 +1,3 @@
-// import Buttons from "./Buttons";
-
 import axios from "axios";
 import {
   FaBackward,
@@ -21,7 +19,6 @@ const DisplayBtns = ({
   setProcessing,
   processing,
   setSelectedBtn,
-  selectedBtn,
   setClickedBtn,
   setContent,
   id,
@@ -34,8 +31,6 @@ const DisplayBtns = ({
   idIndex,
   setIdIndex,
 }: any) => {
-  console.log(id);
-
   const restart = () => {
     clearInterval(updateRef.current);
     elaspedTime.current = 0;
@@ -57,39 +52,15 @@ const DisplayBtns = ({
         const res = await axios.post("http://localhost:5000/handle_request", {
           message: request,
         });
-        console.log(selectedBtn);
-        console.log(res.data.data.article);
-        console.log("request");
-        console.log("id:", id);
 
         setContent(res.data.data.article);
-        console.log("setting id");
-        console.log("key :", request);
-        console.log("id :", res.data.data.id);
-
         setId((items: { key: string; id: number }[] | []) => [
           ...items,
           { key: request, id: res.data.data.id },
         ]);
         setIdIndex(idIndex + 1);
-        console.log(id);
 
         setLoading(false);
-        // console.log("loading turned false");
-        // setSelectedBtn("");
-
-        // if (
-        //   res?.data &&
-        //   Array.isArray(res.data["10 words"]) &&
-        //   res.data["10 words"].length > 0
-        // ) {
-        //   setContent(res.data.data.article);
-        //   setId((id: number[] | []) => [...id, res.data.id]);
-        //   setLoading(false);
-        //   console.log("loading turned false");
-        // }
-
-        // const n = res?.data?.["10 words"]?.[0]?.article ?? "Article not found";
       } catch (err) {
         console.error("Request failed:", err);
       }
@@ -105,11 +76,7 @@ const DisplayBtns = ({
   };
 
   const forward = () => {
-    // if (id.length === 1 && id[0].key === "A-Z") return;
     stop();
-    console.log("id for forwards request", id);
-    console.log("request sent for forwards", id[idIndex + 1]);
-    console.log("indexId :", idIndex + 1);
 
     const article = async () => {
       try {
@@ -123,7 +90,6 @@ const DisplayBtns = ({
             ...items,
             { key: request, id: res.data.data.id },
           ]);
-          // setIdIndex(idIndex + 1);
         }
 
         setContent(res.data.data.article);
@@ -135,8 +101,6 @@ const DisplayBtns = ({
         setClickedBtn(current[0].toUpperCase() + current.slice(1));
         setSelectedBtn(current[0].toUpperCase() + current.slice(1));
         setRequest(id[idIndex + 1].key);
-
-        console.log("key : ", current[0].toUpperCase() + current.slice(1));
       } catch (err) {
         console.error("Request failed:", err);
       }
@@ -147,17 +111,10 @@ const DisplayBtns = ({
     setLoading(true);
     startTime.current = Date.now();
     setTimer("00 : 00 : 00");
-    // elaspedTime.current = Date.now();
-    // if (!running && !processing) {
     article();
-    // }
   };
 
   const backward = () => {
-    console.log("id for backword request", id);
-    console.log("request sent for backword", id[idIndex - 1]);
-    console.log("indexId :", idIndex - 1);
-
     const article = async () => {
       try {
         const res = await axios.post("http://localhost:5000/handle_request", {
@@ -182,10 +139,7 @@ const DisplayBtns = ({
     setLoading(true);
     startTime.current = Date.now();
     setTimer("00 : 00 : 00");
-    // elaspedTime.current = Date.now();
-    // if (!running && !processing) {
     article();
-    // }
   };
 
   return (
