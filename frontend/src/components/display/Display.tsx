@@ -79,7 +79,7 @@ const Display = () => {
     <section
       className="flex flex-col items-center min-w-1 grow-1 h-[calc(100vh-50px)] border-2 leading-[100%]"
       onClick={() => setSelectedBtn("")}>
-      <DisplayTimer {...{ timer, isNavbarOpen, setIsNavbarOpen }} />
+      <DisplayTimer {...{ timer, isNavbarOpen, setIsNavbarOpen, running }} />
       <DisplayScreen
         {...{
           running,
