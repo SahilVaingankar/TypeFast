@@ -58,8 +58,6 @@ const Screen = ({
 
   const displayEvent = (e: KeyboardEvent) => {
     e.preventDefault();
-    console.log(currentIndex);
-    console.log(content);
 
     const expectedChar = content[currentIndex];
 
@@ -98,12 +96,10 @@ const Screen = ({
         setTypedStatus(updatedStatus);
       }
     }
-    console.log(pressedKey, "===", expectedChar);
-
     if (pressedKey === expectedChar) {
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
-      setCurrentIndex((prev: number) => prev + 1);
+      setCurrentIndex((prev: any) => prev + 1);
       if (currentIndex === content.length - 1) {
         setRunning(false);
         setGameOver(true);
@@ -124,7 +120,7 @@ const Screen = ({
   useEffect(() => {
     const element = displayEventRef.current;
 
-    if (running && element) {
+    if (running && element && !loading) {
       element.addEventListener("keydown", displayEvent);
       element.focus(); // optional: focus automatically
     } else if (!running && element) {
@@ -134,7 +130,7 @@ const Screen = ({
     return () => {
       element?.removeEventListener("keydown", displayEvent);
     };
-  }, [currentIndex, typedStatus, running]);
+  }, [currentIndex, typedStatus, running, loading]);
 
   return (
     <main
