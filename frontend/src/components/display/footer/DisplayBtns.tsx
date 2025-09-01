@@ -57,6 +57,8 @@ const DisplayBtns = ({
         );
 
         setContent(res.data.data.article);
+        console.log(res.data.data.article);
+
         setId((items: { key: string; id: number }[] | []) => [
           ...items,
           { key: request, id: res.data.data.id },
