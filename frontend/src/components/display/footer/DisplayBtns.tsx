@@ -49,7 +49,6 @@ const DisplayBtns = ({
   const pause = () => {
     const article = async () => {
       try {
-        setLoading(true);
         const res = await axios.post(
           "https://typefast-production.up.railway.app/handle_request",
           {
