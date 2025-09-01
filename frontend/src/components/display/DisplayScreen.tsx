@@ -100,7 +100,7 @@ const Screen = ({
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
       setCurrentIndex((prev: any) => prev + 1);
-      if (currentIndex === content.length) {
+      if (currentIndex === content.length - 1) {
         setRunning(false);
         setGameOver(true);
       }
