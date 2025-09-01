@@ -96,10 +96,12 @@ const Screen = ({
         setTypedStatus(updatedStatus);
       }
     }
+    console.log(pressedKey, "===", expectedChar);
+
     if (pressedKey === expectedChar) {
       updatedStatus[currentIndex] = "true";
       setTypedStatus(updatedStatus);
-      setCurrentIndex((prev: any) => prev + 1);
+      setCurrentIndex((prev: number) => prev + 1);
       if (currentIndex === content.length - 1) {
         setRunning(false);
         setGameOver(true);
