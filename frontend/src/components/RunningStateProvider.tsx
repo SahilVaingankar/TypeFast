@@ -45,7 +45,7 @@ const RunningStateProvider = ({ children }: any) => {
   const startTime = useRef<number>(Date.now());
   const elaspedTime = useRef<number>(0);
   const updateRef = useRef<number | undefined>(undefined);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [typedStatus, setTypedStatus] = useState<string[]>([""]);
   const [content, setContent] = useState<string | undefined>("content");
   const [id, setId] = useState<{ key: string; id: number }[]>([]);
