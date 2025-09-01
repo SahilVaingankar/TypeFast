@@ -59,6 +59,7 @@ const Screen = ({
   const displayEvent = (e: KeyboardEvent) => {
     e.preventDefault();
     console.log(currentIndex);
+    console.log(content);
 
     const expectedChar = content[currentIndex];
 
