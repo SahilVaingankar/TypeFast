@@ -11,11 +11,14 @@ A simple typing speed game built with React.
 
 ## Tech Stack
 
-- React + TypeScript
+- MERN stack with TypeScript
 - Tailwind CSS for styling
 - Axios for API requests
-- Node.js backend (API)
-- Deployed on Railway
+
+## Deployment
+
+- Frontend deployed on Vercel
+- Database hosted on MongoDB Atlas
 
 ## Demo
 
