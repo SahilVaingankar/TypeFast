@@ -31,7 +31,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
     setTypedStatus,
     setCurrentIndex,
   } = context;
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [modal, setModal] = useState<boolean>(false);
 
   const handleClick = (btn: string) => {
@@ -119,11 +119,7 @@ const NavbarBtns = ({ navbarOptions }: any) => {
                 ? " text-blue-700 border-gray-200 bg-gray-200"
                 : "text-white border-white"
             } hover:bg-white hover:text-blue-700 hover:border-blue-300 hover:cursor-pointer transition-all delay-75`}
-            onClick={() => handleClick(btn)}
-            // onBlur={() => {
-            //   setIsOpen(false);
-            // }}
-          >
+            onClick={() => handleClick(btn)}>
             {btn.toLowerCase().slice(-5) === request.slice(-5)
               ? btn.slice(0, -5) + " (" + request + ")"
               : btn}

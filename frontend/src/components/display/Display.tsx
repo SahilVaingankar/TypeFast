@@ -42,7 +42,6 @@ const Display = () => {
     loading,
     setLoading,
   } = context;
-  // const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     const update = () => {

@@ -23,7 +23,6 @@ const Screen = ({
   request,
 }: any) => {
   const displayEventRef = useRef<HTMLElement | null>(null);
-  // const content = "xxxxxxxxxxxxx".split("");
   const [wrongLetter, setWrongLetter] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -113,7 +112,6 @@ const Screen = ({
       const updatedStatus = [...typedStatus];
       updatedStatus[currentIndex] = "false";
       setTypedStatus(updatedStatus);
-      // setGameOver(true);
     }
   };
 
@@ -122,7 +120,7 @@ const Screen = ({
 
     if (running && element && !loading) {
       element.addEventListener("keydown", displayEvent);
-      element.focus(); // optional: focus automatically
+      element.focus();
     } else if (!running && element) {
       element.blur();
     }
