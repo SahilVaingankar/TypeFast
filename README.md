@@ -18,6 +18,7 @@ A simple typing speed game built with React.
 ## Deployment
 
 - Frontend deployed on Vercel
+- Backend deployed on Railway
 - Database hosted on MongoDB Atlas
 
 ## Demo
